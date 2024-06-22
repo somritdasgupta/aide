@@ -38,7 +38,7 @@
     "lucide-react": "^0.350.0",
     "mammoth": "^1.7.2",
     "ml-distance": "^4.0.1",
-    "pdfjs-dist": "4.0.379",
+    "pdfjs-dist": "4.2.67",
     "property-information": "^6.4.1",
     "pubsub-js": "^1.9.4",
     "react": "18.2.0",
