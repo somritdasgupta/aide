@@ -1,0 +1,11 @@
+{
+    "extName": {
+        "message": "aiDe - Web"
+    },
+    "extDescription": {
+        "message": "aiDe is a powerful assistant powered by FOSS LLMs"
+    },
+    "openSidePanelToChat": {
+        "message": "aiDe assist⚡"
+    }
+}
