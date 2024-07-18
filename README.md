@@ -1,5 +1,3 @@
-# Aide
-
 Aide is an open-source Chrome Extension that integrates a Sidebar and Web UI for your local AI model, allowing seamless interaction from any webpage.
 
 ## Installation
