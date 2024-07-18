@@ -37,14 +37,14 @@ export const KnowledgeSettings = () => {
 
   const statusColor = {
     finished: "green",
-    processing: "blue",
-    pending: "gray"
+    processing: "yellow",
+    pending: "gray",
+    failed: "red"
   }
 
   return (
     <div>
       <div>
-        {/* Add new model button */}
         <div className="mb-6">
           <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-end sm:flex-nowrap">
             <div className="ml-4 mt-2 flex-shrink-0">
