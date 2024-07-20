@@ -1,5 +1,5 @@
 {
-    "pageAssist": "aiDe.",
+    "pageAssist": "aiDe",
     "selectAModel": "Select a Model",
     "save": "Save",
     "saved": "Saved",
@@ -38,20 +38,20 @@
         }
     },
     "copyToClipboard": "Copy to clipboard",
-    "webSearch": "Searching the web",
+    "webSearch": "Searching the web for you..",
     "regenerate": "Regenerate",
     "edit": "Edit",
     "saveAndSubmit": "Save & Submit",
     "editMessage": {
         "placeholder": "Type a message..."
     },
-    "submit": "Submit",
+    "submit": "Send",
     "noData": "No data",
     "noHistory": "No chat history",
     "chatWithCurrentPage": "Chat with current page",
     "beta": "Beta",
     "tts": "Read aloud",
-    "currentChatModelSettings":"Current Chat Model Settings",
+    "currentChatModelSettings": "Current Chat Model Settings",
     "modelSettings": {
         "label": "Model Settings",
         "description": "Set the model options globally for all chats",
@@ -63,11 +63,11 @@
             },
             "temperature": {
                 "label": "Temperature",
-                "placeholder": "Enter Temperature value (e.g. 0.7, 1.0)"
+                "placeholder": "Controls the randomness of the model's outputs (Range: 0-1)"
             },
             "numCtx": {
                 "label": "Number of Contexts",
-                "placeholder": "Enter Number of Contexts value (default: 2048)"
+                "placeholder": "Number of previous conversation exchanges considered (Default: 2048)"
             },
             "seed": {
                 "label": "Seed",
@@ -76,11 +76,11 @@
             },
             "topK": {
                 "label": "Top K",
-                "placeholder": "Enter Top K value (e.g. 40, 100)"
+                "placeholder": "Limits the number of possible next words considered (Range: 1-x)"
             },
             "topP": {
                 "label": "Top P",
-                "placeholder": "Enter Top P value (e.g. 0.9, 0.95)"
+                "placeholder": "Limits the probability distribution over possible words (Range: 0-1)"
             }
         },
         "advanced": "More Model Settings"

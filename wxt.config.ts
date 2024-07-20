@@ -11,7 +11,8 @@ const chromeMV3Permissions = [
   "action",
   "unlimitedStorage",
   "contextMenus",
-  "tts"
+  "tts",
+  "notifications"
 ]
 
 const firefoxMV2Permissions = [
@@ -22,6 +23,7 @@ const firefoxMV2Permissions = [
   "contextMenus",
   "webRequest",
   "webRequestBlocking",
+  "notifications",
   "http://*/*",
   "https://*/*",
   "file://*/*"
@@ -48,10 +50,10 @@ export default defineConfig({
   outDir: "build",
 
   manifest: {
-    version: "1.1.10",
+    version: "1.1.15",
     name:
       process.env.TARGET === "firefox"
-        ? "Page Assist - A Web UI for Local AI Models"
+        ? "aiDe"
         : "__MSG_extName__",
     description: "__MSG_extDescription__",
     default_locale: "en",
@@ -61,7 +63,7 @@ export default defineConfig({
       process.env.TARGET === "firefox"
         ? {
           gecko: {
-            id: "page-assist@nazeem"
+            id: ""
           }
         }
         : undefined,
@@ -71,13 +73,13 @@ export default defineConfig({
         : undefined,
     commands: {
       _execute_action: {
-        description: "Open the Web UI",
+        description: "Open aiDe",
         suggested_key: {
           default: "Ctrl+Shift+L"
         }
       },
       execute_side_panel: {
-        description: "Open the side panel",
+        description: "aiDe SideKick",
         suggested_key: {
           default: "Ctrl+Shift+P"
         }

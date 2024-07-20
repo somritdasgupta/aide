@@ -1,23 +1,55 @@
 import { Storage } from "@plasmohq/storage"
 import { cleanUrl } from "../libs/clean-url"
 import { urlRewriteRuntime } from "../libs/runtime"
+import { getChromeAIModel } from "./chrome"
 
 const storage = new Storage()
 
 const DEFAULT_OLLAMA_URL = "http://127.0.0.1:11434"
 const DEFAULT_ASK_FOR_MODEL_SELECTION_EVERY_TIME = true
-const DEFAULT_PAGE_SHARE_URL = "https://pageassist.xyz"
+const DEFAULT_PAGE_SHARE_URL = "https://somritdasgupta.github.io/aide"
 
 const DEFAULT_RAG_QUESTION_PROMPT =
   "Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question.   Chat History: {chat_history} Follow Up Input: {question} Standalone question:"
 
 const DEFAUTL_RAG_SYSTEM_PROMPT = `You are a helpful AI assistant. Use the following pieces of context to answer the question at the end. If you don't know the answer, just say you don't know. DO NOT try to make up an answer. If the question is not related to the context, politely respond that you are tuned to only answer questions that are related to the context.  {context}  Question: {question} Helpful answer:`
 
-const DEFAULT_WEBSEARCH_PROMP = `You are a helpful assistant that can answer any questions. You can use the following search results in case you want to answer questions about anything in real-time. The current date and time are {current_date_time}.  
+const DEFAULT_WEBSEARCH_PROMP = `You are an AI model who is expert at searching the web and answering user's queries. 
 
-Search results: 
+Generate a response that is informative and relevant to the user's query based on provided search results. the current date and time are {current_date_time}.  
 
-{search_results}`
+\`search-results\` block provides knowledge from the web search results. You can use this information to generate a meaningful response.
+
+<search-results>
+ {search_results}
+</search-results>
+`
+
+const DEFAULT_WEBSEARCH_FOLLOWUP_PROMPT = `You will give a follow-up question.  You need to rephrase the follow-up question if needed so it is a standalone question that can be used by the AI model to search the internet.
+
+Example:
+
+Follow-up question: What are the symptoms of a heart attack?
+
+Rephrased question: Symptoms of a heart attack.
+
+Follow-up question: Where is the upcoming Olympics being held?
+
+Rephrased question: Location of the upcoming Olympics.
+
+Follow-up question: Taylor Swift's latest album?
+
+Rephrased question: Name of Taylor Swift's latest album.
+
+
+Previous Conversation: 
+
+{chat_history}
+
+Follow-up question: {question}
+
+Rephrased question:
+`
 
 export const getOllamaURL = async () => {
   const ollamaURL = await storage.get("ollamaURL")
@@ -113,6 +145,7 @@ export const deleteModel = async (model: string) => {
   return response.json()
 }
 
+
 export const fetchChatModels = async ({
   returnEmpty = false
 }: {
@@ -143,15 +176,39 @@ export const fetchChatModels = async ({
         quantization_level: string
       }
     }[]
-    return models?.filter((model) => {
-      return (
-        !model?.details?.families?.includes("bert") &&
-        !model?.details?.families?.includes("nomic-bert")
-      )
-    })
+    const chatModels = models
+      ?.filter((model) => {
+        return (
+          !model?.details?.families?.includes("bert") &&
+          !model?.details?.families?.includes("nomic-bert")
+        )
+      })
+      .map((model) => {
+        return {
+          ...model,
+          provider: "ollama"
+        }
+      })
+    const chromeModel = await getChromeAIModel()
+    return [
+      ...chatModels,
+      ...chromeModel
+    ]
   } catch (e) {
     console.error(e)
-    return await getAllModels({ returnEmpty })
+    const allModels = await getAllModels({ returnEmpty })
+    const models = allModels.map((model) => {
+      return {
+        ...model,
+        provider: "ollama"
+      }
+    })
+    const chromeModel = await getChromeAIModel()
+
+    return [
+      ...models,
+      ...chromeModel
+    ]
   }
 }
 
@@ -289,7 +346,7 @@ export const setWebSearchPrompt = async (prompt: string) => {
 export const geWebSearchFollowUpPrompt = async () => {
   const prompt = await storage.get("webSearchFollowUpPrompt")
   if (!prompt || prompt.length === 0) {
-    return DEFAULT_RAG_QUESTION_PROMPT
+    return DEFAULT_WEBSEARCH_FOLLOWUP_PROMPT
   }
   return prompt
 }
@@ -314,4 +371,3 @@ export const getPageShareUrl = async () => {
 export const setPageShareUrl = async (pageShareUrl: string) => {
   await storage.set("pageShareUrl", pageShareUrl)
 }
-

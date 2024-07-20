@@ -19,7 +19,9 @@ function IndexSidepanel() {
         theme={{
           algorithm:
             mode === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
-         
+          token: {
+            fontFamily: "Arimo"
+          }
         }}
         renderEmpty={() => (
           <Empty

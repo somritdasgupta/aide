@@ -3,6 +3,7 @@ import { useDarkMode } from "~/hooks/useDarkmode"
 import { useMessageOption } from "~/hooks/useMessageOption"
 import { PageAssitDatabase } from "@/db"
 import { Select, Switch } from "antd"
+import { SUPPORTED_LANGUAGES } from "~/utils/supporetd-languages"
 import { MoonIcon, SunIcon } from "lucide-react"
 import { SearchModeSettings } from "./search-mode"
 import { useTranslation } from "react-i18next"
@@ -12,10 +13,9 @@ import {
   exportPageAssistData,
   importPageAssistData
 } from "@/libs/export-import"
-import { BetaTag } from "@/components/Common/Beta"
 import { useStorage } from "@plasmohq/storage/hook"
 
-export const SettingOther = () => {
+export const GeneralSettings = () => {
   const { clearChat, speechToTextLanguage, setSpeechToTextLanguage } =
     useMessageOption()
 
@@ -24,14 +24,22 @@ export const SettingOther = () => {
     false
   )
 
+  const [restoreLastChatModel, setRestoreLastChatModel] = useStorage(
+    "restoreLastChatModel",
+    false
+  )
+
   const [hideCurrentChatModelSettings, setHideCurrentChatModelSettings] =
     useStorage("hideCurrentChatModelSettings", false)
+
+  const [sendNotificationAfterIndexing, setSendNotificationAfterIndexing] =
+    useStorage("sendNotificationAfterIndexing", false)
 
   const queryClient = useQueryClient()
 
   const { mode, toggleDarkMode } = useDarkMode()
   const { t } = useTranslation("settings")
-  const { changeLocale, locale } = useI18n()
+  const { changeLocale, locale, supportLanguage } = useI18n()
 
   return (
     <dl className="flex flex-col space-y-6 text-sm">
@@ -42,7 +50,7 @@ export const SettingOther = () => {
         <div className="border border-b border-gray-200 dark:border-gray-600 mt-3"></div>
       </div>
       <div className="flex flex-row justify-between">
-        <span className="text-gray-500 dark:text-neutral-50">
+        <span className="text-gray-700 dark:text-neutral-50">
           {t("generalSettings.settings.speechRecognitionLang.label")}
         </span>
 
@@ -52,14 +60,19 @@ export const SettingOther = () => {
           )}
           allowClear
           showSearch
+          options={SUPPORTED_LANGUAGES}
           value={speechToTextLanguage}
-            onChange={(value) => {
+          filterOption={(input, option) =>
+            option!.label.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+            option!.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+          onChange={(value) => {
             setSpeechToTextLanguage(value)
           }}
         />
       </div>
       <div className="flex flex-row justify-between">
-        <span className="text-gray-500   dark:text-neutral-50">
+        <span className="text-gray-700   dark:text-neutral-50">
           {t("generalSettings.settings.language.label")}
         </span>
 
@@ -68,8 +81,12 @@ export const SettingOther = () => {
           allowClear
           showSearch
           style={{ width: "200px" }}
+          options={supportLanguage}
           value={locale}
-        
+          filterOption={(input, option) =>
+            option!.label.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+            option!.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
           onChange={(value) => {
             changeLocale(value)
           }}
@@ -77,8 +94,7 @@ export const SettingOther = () => {
       </div>
       <div className="flex flex-row justify-between">
         <div className="inline-flex items-center gap-2">
-          <BetaTag />
-          <span className="text-gray-500   dark:text-neutral-50">
+          <span className="text-gray-700   dark:text-neutral-50">
             {t("generalSettings.settings.copilotResumeLastChat.label")}
           </span>
         </div>
@@ -89,8 +105,7 @@ export const SettingOther = () => {
       </div>
       <div className="flex flex-row justify-between">
         <div className="inline-flex items-center gap-2">
-          <BetaTag />
-          <span className="text-gray-500   dark:text-neutral-50">
+          <span className="text-gray-700   dark:text-neutral-50">
             {t("generalSettings.settings.hideCurrentChatModelSettings.label")}
           </span>
         </div>
@@ -101,7 +116,33 @@ export const SettingOther = () => {
         />
       </div>
       <div className="flex flex-row justify-between">
-        <span className="text-gray-500 dark:text-neutral-50 ">
+        <div className="inline-flex items-center gap-2">
+          <span className="text-gray-700   dark:text-neutral-50">
+            {t("generalSettings.settings.restoreLastChatModel.label")}
+          </span>
+        </div>
+
+        <Switch
+          checked={restoreLastChatModel}
+          onChange={(checked) => setRestoreLastChatModel(checked)}
+        />
+      </div>
+
+      <div className="flex flex-row justify-between">
+        <div className="inline-flex items-center gap-2">
+          <span className="text-gray-700   dark:text-neutral-50">
+            {t("generalSettings.settings.sendNotificationAfterIndexing.label")}
+          </span>
+        </div>
+
+        <Switch
+          checked={sendNotificationAfterIndexing}
+          onChange={setSendNotificationAfterIndexing}
+        />
+      </div>
+
+      <div className="flex flex-row justify-between">
+        <span className="text-gray-700 dark:text-neutral-50 ">
           {t("generalSettings.settings.darkMode.label")}
         </span>
 
@@ -128,7 +169,7 @@ export const SettingOther = () => {
           <div className="border border-b border-gray-200 dark:border-gray-600 mt-3"></div>
         </div>
         <div className="flex flex-row mb-3 justify-between">
-          <span className="text-gray-500 dark:text-neutral-50 ">
+          <span className="text-gray-700 dark:text-neutral-50 ">
             {t("generalSettings.system.deleteChatHistory.label")}
           </span>
 
@@ -152,7 +193,7 @@ export const SettingOther = () => {
           </button>
         </div>
         <div className="flex flex-row mb-3 justify-between">
-          <span className="text-gray-500 dark:text-neutral-50 ">
+          <span className="text-gray-700 dark:text-neutral-50 ">
             {t("generalSettings.system.export.label")}
           </span>
           <button
@@ -162,7 +203,7 @@ export const SettingOther = () => {
           </button>
         </div>
         <div className="flex flex-row mb-3 justify-between">
-          <span className="text-gray-500 dark:text-neutral-50 ">
+          <span className="text-gray-700 dark:text-neutral-50 ">
             {t("generalSettings.system.import.label")}
           </span>
           <label

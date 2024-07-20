@@ -5,22 +5,29 @@ import { ConfigProvider, Empty, theme } from "antd"
 import { StyleProvider } from "@ant-design/cssinjs"
 import { useDarkMode } from "~/hooks/useDarkmode"
 import { OptionRouting } from "~/routes"
+import "~/i18n"
+import { useTranslation } from "react-i18next"
 import { PageAssistProvider } from "@/components/Common/PageAssistProvider"
 
 function IndexOption() {
   const { mode } = useDarkMode()
+  const { t, i18n } = useTranslation()
   return (
     <MemoryRouter>
       <ConfigProvider
         theme={{
           algorithm:
             mode === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
-                  }}
+          token: {
+            fontFamily: "Arimo"
+          }
+        }}
         renderEmpty={() => (
           <Empty
             imageStyle={{
               height: 60
             }}
+            description={t("common:noData")}
           />
         )}>
         <StyleProvider hashPriority="high">

@@ -94,8 +94,18 @@ export const EmptySidePanel = () => {
               </button>
               {ollamaURL &&
                 cleanUrl(ollamaURL) !== "http://127.0.0.1:11434" && (
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-4 text-center">
-                    
+                  <p className="text-xs text-gray-700 dark:text-gray-400 mb-4 text-center">
+                    <Trans
+                      i18nKey="playground:ollamaState.connectionError"
+                      components={{
+                        anchor: (
+                          <a
+                            href="https://somritdasgupta.github.io/aide"
+                            target="__blank"
+                            className="text-blue-600 dark:text-blue-400"></a>
+                        )
+                      }}
+                    />
                   </p>
                 )}
             </div>

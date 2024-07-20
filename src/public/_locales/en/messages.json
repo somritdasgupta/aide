@@ -1,11 +1,14 @@
 {
     "extName": {
-        "message": "aiDe - Web"
+        "message": "aiDe"
     },
     "extDescription": {
-        "message": "aiDe is a powerful assistant powered by FOSS LLMs"
+        "message": "An intuitive and fast feature-rich interface for your local LLMs from ollama"
     },
     "openSidePanelToChat": {
-        "message": "aiDe assist⚡"
+        "message": "aiDe SideKick"
+    },
+    "openOptionToChat": {
+        "message": "Open aiDe"
     }
 }

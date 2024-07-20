@@ -8,7 +8,7 @@ i18n
     .use(initReactI18next)
     .init({
         resources: {
-            en: en
+            en: en,
         },
         fallbackLng: "en",
         lng: localStorage.getItem("i18nextLng") || "en",

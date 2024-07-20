@@ -1,3 +1,4 @@
+import { supportLanguage } from "@/i18n/support-language"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -13,5 +14,5 @@ export const useI18n = () => {
     localStorage.setItem("i18nextLng", lang)
   }
 
-  return { locale, changeLocale}
+  return { locale, changeLocale, supportLanguage }
 }

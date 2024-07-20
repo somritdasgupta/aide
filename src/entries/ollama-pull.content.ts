@@ -2,11 +2,11 @@ export default defineContentScript({
   main(ctx) {
     const downloadModel = async (modelName: string) => {
       const ok = confirm(
-        `[aiDe.] Do you want to pull ${modelName} model? This has nothing to do with Ollama.com website. The model will be pulled locally once you confirm.`
+        `[Page Assist Extension] Do you want to pull ${modelName} model? This has nothing to do with Ollama.com website. The model will be pulled locally once you confirm.`
       )
       if (ok) {
         alert(
-          `[aiDe.] Pulling ${modelName} model. For more details, check the extension icon.`
+          `[Page Assist Extension] Pulling ${modelName} model. For more details, check the extension icon.`
         )
 
         await browser.runtime.sendMessage({
@@ -41,12 +41,13 @@ export default defineContentScript({
         })
 
         const span = document.createElement("span")
-        span.title = "Download model via aiDe."
+        span.title = "Download model via Page Assist"
         span.appendChild(newButton)
 
         if (button.parentNode) {
           button.parentNode.appendChild(span)
         }
+
       }
     }
   },
