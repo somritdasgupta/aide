@@ -7,27 +7,26 @@ import {
   InfoIcon,
   CombineIcon,
   ChromeIcon
-} from "lucide-react"
-import { useTranslation } from "react-i18next"
-import { Link, useLocation } from "react-router-dom"
-import { OllamaIcon } from "../Icons/Ollama"
-import { Tag } from "antd"
-import { BetaTag } from "../Common/Beta"
+} from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Link, useLocation } from "react-router-dom";
+import { OllamaIcon } from "../Icons/Ollama";
+import { BetaTag } from "../Common/Beta";
+import { features } from '../../utils/features';
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ")
+  return classes.filter(Boolean).join(" ");
 }
 
 const LinkComponent = (item: {
-  href: string
-  name: string | JSX.Element
-  icon: any
-  current: string,
-  beta?: boolean
+  href: string;
+  name: string | JSX.Element;
+  icon: any;
+  current: string;
+  beta?: boolean;
 }) => {
   return (
     <li className="inline-flex items-center">
-
       <Link
         to={item.href}
         className={classNames(
@@ -35,7 +34,8 @@ const LinkComponent = (item: {
             ? "bg-gray-100 text-gray-600 dark:bg-[#262626] dark:text-white"
             : "text-gray-700 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-200 dark:hover:text-white dark:hover:bg-[#262626]",
           "group flex gap-x-3 rounded-md py-2 pl-2 pr-3 text-sm font-semibold"
-        )}>
+        )}
+      >
         <item.icon
           className={classNames(
             item.current === item.href
@@ -47,25 +47,21 @@ const LinkComponent = (item: {
         />
         {item.name}
       </Link>
-      {
-        item.beta && <BetaTag />
-        }
+      {item.beta && <BetaTag />}
     </li>
-  )
-}
+  );
+};
 
 export const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
-  const location = useLocation()
-  const { t } = useTranslation(["settings", "common"])
+  const location = useLocation();
+  const { t } = useTranslation(["settings", "common"]);
 
   return (
     <>
       <div className="mx-auto max-w-7xl lg:flex lg:gap-x-16 lg:px-8">
-        <aside className="flex lg:rounded-md bg-white lg:p-4 lg:mt-20 overflow-x-auto lg:border-0 border-b  py-4 lg:block lg:w-72 lg:flex-none  dark:bg-[#171717] dark:border-gray-600">
-          <nav className="flex-none  px-4 sm:px-6 lg:px-0">
-            <ul
-              role="list"
-              className="flex gap-x-3 gap-y-1 whitespace-nowrap lg:flex-col">
+        <aside className="flex lg:rounded-md bg-white lg:p-4 lg:mt-20 overflow-x-auto lg:border-0 border-b py-4 lg:block lg:w-72 lg:flex-none dark:bg-[#171717] dark:border-gray-600">
+          <nav className="flex-none px-4 sm:px-6 lg:px-0">
+            <ul role="list" className="flex gap-x-3 gap-y-1 whitespace-nowrap lg:flex-col">
               <LinkComponent
                 href="/settings"
                 name={t("generalSettings.title")}
@@ -84,14 +80,14 @@ export const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
                 icon={OllamaIcon}
                 current={location.pathname}
               />
-             /**{import.meta.env.BROWSER === "chrome" && (
+              {features.showChromeSettings && (
                 <LinkComponent
                   href="/settings/chrome"
                   name={t("chromeAiSettings.title")}
                   icon={ChromeIcon}
                   current={location.pathname}
                 />
-              )}*/ 
+              )}
               <LinkComponent
                 href="/settings/model"
                 name={t("manageModels.title")}
@@ -130,12 +126,12 @@ export const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
           </nav>
         </aside>
 
-        <main className={"px-4 py-16 sm:px-6 lg:flex-auto lg:px-0 lg:py-20"}>
+        <main className="px-4 py-16 sm:px-6 lg:flex-auto lg:px-0 lg:py-20">
           <div className="mx-auto max-w-2xl space-y-16 sm:space-y-10 lg:mx-0 lg:max-w-none">
             {children}
           </div>
         </main>
       </div>
     </>
-  )
-}
+  );
+};

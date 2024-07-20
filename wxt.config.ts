@@ -1,6 +1,6 @@
-import { defineConfig } from "wxt"
-import react from "@vitejs/plugin-react"
-import topLevelAwait from "vite-plugin-top-level-await"
+import { defineConfig } from "wxt";
+import react from "@vitejs/plugin-react";
+import topLevelAwait from "vite-plugin-top-level-await";
 
 const chromeMV3Permissions = [
   "storage",
@@ -12,8 +12,8 @@ const chromeMV3Permissions = [
   "unlimitedStorage",
   "contextMenus",
   "tts",
-  "notifications"
-]
+  "notifications",
+];
 
 const firefoxMV2Permissions = [
   "storage",
@@ -26,8 +26,8 @@ const firefoxMV2Permissions = [
   "notifications",
   "http://*/*",
   "https://*/*",
-  "file://*/*"
-]
+  "file://*/*",
+];
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
@@ -36,14 +36,14 @@ export default defineConfig({
       react(),
       topLevelAwait({
         promiseExportName: "__tla",
-        promiseImportName: (i) => `__tla_${i}`
-      })
+        promiseImportName: (i) => `__tla_${i}`,
+      }),
     ],
     build: {
       rollupOptions: {
-        external: ["langchain", "@langchain/community"]
-      }
-    }
+        external: ["langchain", "@langchain/community"],
+      },
+    },
   }),
   entrypointsDir: "entries",
   srcDir: "src",
@@ -62,10 +62,10 @@ export default defineConfig({
     browser_specific_settings:
       process.env.TARGET === "firefox"
         ? {
-          gecko: {
-            id: ""
+            gecko: {
+              id: "",
+            },
           }
-        }
         : undefined,
     host_permissions:
       process.env.TARGET !== "firefox"
@@ -75,19 +75,19 @@ export default defineConfig({
       _execute_action: {
         description: "Open aiDe",
         suggested_key: {
-          default: "Ctrl+Shift+L"
-        }
+          default: "Ctrl+Shift+L",
+        },
       },
       execute_side_panel: {
         description: "aiDe SideKick",
         suggested_key: {
-          default: "Ctrl+Shift+P"
-        }
-      }
+          default: "Ctrl+Shift+P",
+        },
+      },
     },
     permissions:
       process.env.TARGET === "firefox"
         ? firefoxMV2Permissions
-        : chromeMV3Permissions
-  }
-})
+        : chromeMV3Permissions,
+  },
+});
