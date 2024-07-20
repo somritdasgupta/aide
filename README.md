@@ -1,6 +1,21 @@
-Aide is a Web Extension that integrates a SideKick and Web UI for your local AI LLMs model and also can perform multimodal actions as well as web search using google to fetch real-time actionable data, which allows seamless interaction from any webpage or a tab and can work with any timeline data if it's available over the internet.
+Aide is a powerful and versatile web extension designed to enhance your browsing experience by integrating a sophisticated AI-powered SideKick and an intuitive Web UI. This innovative tool allows you to seamlessly interact with your local AI language models (LLMs) and perform a wide range of actions directly from any webpage or browser tab.
 
-## Installation
+With Aide, you can tap into the power of multimodal capabilities, enabling you to process and generate text, images, and more. Its advanced web scraping feature, powered by Cheerio, allows you to fetch real-time actionable data from the web, ensuring you always have the most up-to-date information at your fingertips.
+
+Additionally, Aide leverages Google search to provide real-time data, allowing you to effortlessly gather and utilize information from the internet. Whether you're researching, managing tasks, or simply browsing, Aide transforms the way you interact with online content, making your workflow more efficient and productive.
+
+## Real-World Benefits
+
+- **Privacy**: By running AI models locally, Aide ensures that your sensitive data never leaves your device, providing a higher level of privacy compared to cloud-based solutions.
+
+- **Speed**: Local execution of AI models results in faster processing times, as there’s no need to wait for data to travel to and from a remote server.
+
+- **Customization**: Running AI models on your machine allows for greater customization. You can fine-tune models to better match your specific needs and preferences, enhancing their effectiveness and relevance.
+
+Aide is perfect for researchers, professionals, and anyone who values privacy, speed, and customization in their AI tools. It helps you gather and use information more effectively, making your online activities smoother and more productive. With Aide, you can leverage the power of AI directly in your browser, enhancing your ability to interact with and utilize online content.
+
+
+## Installation 
 
 ### Prerequisites
 
