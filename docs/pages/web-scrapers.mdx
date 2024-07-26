@@ -1,0 +1,148 @@
+# Web Scraping with Cheerio in Aide
+
+## Overview
+
+Cheerio, a fast and flexible library for server-side HTML parsing, is utilized in Aide for advanced web scraping functionalities. It enables precise extraction and manipulation of HTML content from web pages, allowing for real-time data retrieval and seamless integration with Retrieval Augmented Generation (RAG) systems. This documentation provides a detailed technical overview of how Cheerio is employed within Aide, covering setup, usage, and fine-tuning mechanisms.
+
+## Features
+
+### Real-Time Data Extraction
+
+- **Objective**: To extract and utilize the most current web content based on user input, ensuring that the information integrated into Aide’s processes is up-to-date and relevant.
+- **Integration**: Cheerio parses HTML content fetched from web pages, allowing Aide to dynamically gather and process real-time data.
+
+### Customizable Real-Time Data Control Engine
+
+- **Default Engine**: Google Search
+  - **Mechanism**: Aide employs Google’s search engine by default to gather web content. This involves sending search queries to Google and processing the returned HTML results.
+  - **Advantages**: Leverages Google’s extensive indexing capabilities to source a broad range of content.
+
+- **Custom Engine Options**: 
+  - **Configuration**: Users can configure Aide to use alternative search engines or data sources. This is done via the settings interface where users can specify the URL patterns and parameters for custom engines.
+  - **Flexibility**: Allows users to optimize data scraping according to specific requirements or preferences.
+
+### Online and Offline Modes
+
+- **Online Mode**:
+  - **Description**: Enables real-time scraping of web content by making live HTTP requests to target URLs.
+  - **Implementation**:
+    1. **HTTP Request**: Use libraries like `axios` or `node-fetch` to perform GET requests to web pages.
+    2. **HTML Parsing**: Pass the retrieved HTML content to Cheerio for parsing and extraction.
+    3. **Dynamic Updates**: Continuously fetch new data as required by the application.
+
+- **Offline Mode**:
+  - **Description**: Allows scraping of pre-stored or cached HTML files, useful for static content or scenarios with limited internet access.
+  - **Implementation**:
+    1. **File Handling**: Load HTML files from local storage.
+    2. **HTML Parsing**: Process the local HTML content using Cheerio.
+    3. **Data Utilization**: Use the extracted data as needed without real-time internet access.
+
+## Technical Details
+
+### Cheerio Parsing
+
+- **HTML Parsing**:
+  - **Mechanism**: Cheerio loads and parses HTML content similarly to jQuery, enabling traversal and manipulation of the document object model (DOM).
+  - **Syntax**: Utilizes jQuery-like syntax for selecting elements, traversing nodes, and extracting data.
+  - **Example**:
+    ```javascript
+    const cheerio = require('cheerio');
+    const $ = cheerio.load('<html><body><h1>Hello World</h1></body></html>');
+    console.log($('h1').text()); // Outputs: Hello World
+    ```
+
+- **Data Extraction**:
+  - **Selectors**: Employ CSS selectors to identify and extract specific elements.
+  - **Methods**: Utilize methods such as `.text()`, `.attr()`, and `.html()` to retrieve text content, attributes, and HTML structure, respectively.
+  - **Example**:
+    ```javascript
+    const cheerio = require('cheerio');
+    const html = '<div class="content"><p class="summary">Summary text</p></div>';
+    const $ = cheerio.load(html);
+    const summaryText = $('.summary').text();
+    console.log(summaryText); // Outputs: Summary text
+    ```
+
+### Integration with Aide
+
+- **Fetching Data**:
+  - **Process**:
+    1. **HTTP Request**: Send requests to target web pages using libraries such as `axios` or `node-fetch`.
+    2. **Response Handling**: Receive HTML responses and pass them to Cheerio for parsing.
+  - **Example**:
+    ```javascript
+    const axios = require('axios');
+    const cheerio = require('cheerio');
+
+    async function fetchData(url) {
+      const response = await axios.get(url);
+      const $ = cheerio.load(response.data);
+      return $('title').text(); // Example extraction
+    }
+    ```
+
+- **Manipulating Data**:
+  - **Extraction**: Define rules and selectors to extract relevant information from the parsed HTML.
+  - **Example**:
+    ```javascript
+    const html = '<ul><li>Item 1</li><li>Item 2</li></ul>';
+    const $ = cheerio.load(html);
+    $('li').each((i, elem) => {
+      console.log($(elem).text()); // Outputs: Item 1, Item 2
+    });
+    ```
+
+- **RAG Integration**:
+  - **Data Utilization**: Pass the extracted content to Aide’s RAG system to enhance the quality and relevance of generated responses.
+  - **Process**:
+    1. **Feed Data**: Incorporate the scraped data into the knowledge base or context for RAG.
+    2. **Enhance Responses**: Use the latest data to provide more accurate and contextually relevant answers.
+
+## Fine-Tuning Modal in Aide
+
+### Available Fine-Tuning Options
+
+- **Predefined Models**:
+  - **Selection**: Choose from a set of pretrained models that cater to various use cases and domains.
+  - **Customization**: Adapt these models to specific tasks through fine-tuning.
+
+- **Fine-Tuning Workflow**:
+  1. **Select Base Model**: Choose a model based on the requirements of the task.
+  2. **Prepare Dataset**: Organize and preprocess the dataset for training. Ensure it is relevant and representative of the target domain.
+  3. **Configure Training Parameters**: Define hyperparameters such as learning rate, batch size, and number of epochs.
+  4. **Execute Training**: Initiate the fine-tuning process using the configured parameters.
+  5. **Evaluate Model**: Assess the performance of the fine-tuned model and make adjustments as necessary.
+
+### Modes of Operation
+
+- **Online Fine-Tuning**:
+  - **Description**: Fine-tune models using real-time data and updates.
+  - **Benefits**: Keeps models current with the latest trends and information.
+
+- **Offline Fine-Tuning**:
+  - **Description**: Conduct fine-tuning with static or pre-collected datasets.
+  - **Benefits**: Suitable for scenarios where internet access is limited or when working with historical data.
+
+## Practical Usage
+
+1. **Setting Up Cheerio**:
+   - **Installation**: Install Cheerio and necessary libraries (e.g., `axios` for HTTP requests).
+     ```bash
+     npm install cheerio axios
+     ```
+
+2. **Scraping Web Content**:
+   - **Configure Requests**: Set up HTTP requests to target URLs.
+   - **Extract Data**: Use Cheerio to parse and extract data from the HTML content.
+
+3. **Integrating with RAG**:
+   - **Data Input**: Integrate the scraped data into the RAG system within Aide.
+   - **Enhancement**: Utilize the data to improve response generation.
+
+4. **Fine-Tuning Models**:
+   - **Select and Train**: Choose appropriate models and fine-tune them based on specific datasets.
+   - **Evaluate and Optimize**: Continuously monitor and refine the models for better performance.
+
+## Conclusion
+
+Cheerio’s integration within Aide empowers users with a powerful tool for web scraping and real-time data extraction. By leveraging Cheerio’s HTML parsing capabilities and customizable data sources, Aide provides flexibility and efficiency in gathering and utilizing web content. Coupled with advanced fine-tuning options, Aide enables users to refine and adapt models to meet specific needs, ensuring enhanced functionality and performance.

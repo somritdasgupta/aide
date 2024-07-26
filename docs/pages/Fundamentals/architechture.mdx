@@ -1,0 +1,55 @@
+# LLM Architectures
+
+LLM architectures can be broadly categorized into encoders, decoders, and encoder-decoder models. Each type serves different purposes in natural language processing.
+
+## Key Characteristics
+
+- **Probabilistic Nature**: LLMs assign probabilities to potential next words, choosing the one with the highest probability based on the context.
+- **Scale**: The size of an LLM, defined by the number of parameters, impacts its ability to understand and generate language.
+
+### Encoders
+
+Encoders transform a sequence of words into a vector representation, capturing the semantic meaning of the text. These models are essential for tasks like text embedding and classification.
+
+- **MiniLM**: A lightweight model designed for efficiency.
+- **Embed-light**: Optimized for creating embeddings with reduced computational overhead.
+- **BERT (Bidirectional Encoder Representations from Transformers)**: Captures context from both directions to improve understanding.
+- **RoBERTa (Robustly Optimized BERT Pretraining Approach)**: Enhances BERT by optimizing training techniques.
+- **DistillBERT**: A smaller, faster version of BERT with comparable performance.
+- **SBERT (Sentence-BERT)**: Tailored for generating sentence embeddings.
+
+### Decoders
+
+Decoders generate text by predicting the next word based on the input sequence. They are integral to tasks such as text generation and completion.
+
+- **GPT-4**: A state-of-the-art model known for its advanced text generation capabilities.
+- **Llama**: A model focusing on efficiency and scalability.
+- **BLOOM**: Designed for diverse text generation tasks.
+- **Falcon**: A model optimized for generating coherent and contextually relevant text.
+
+### Encoder-Decoder Models
+
+These models combine the functionalities of encoders and decoders, first encoding the input and then generating text based on the encoded information.
+
+- **T5 (Text-To-Text Transfer Transformer)**: Converts various NLP tasks into a text-to-text format.
+- **UL2 (Universal Language Model Fine-Tuning)**: A model designed for general language understanding and generation.
+- **BART (Bidirectional and Auto-Regressive Transformers)**: Combines the benefits of BERT and GPT for enhanced text generation.
+
+## Historical Tasks and Model Types
+
+Different models are suited for various tasks, which can be categorized into:
+
+| Task                       | Encoders | Decoders | Encoder-Decoder |
+|----------------------------|----------|----------|-----------------|
+| Embedding text             | Yes      | No       | No              |
+| Abstractive QA             | No       | Yes      | Yes             |
+| Extractive QA              | Yes      | Maybe    | Yes             |
+| Translation                | No       | Maybe    | Yes             |
+| Creative writing           | No       | Yes      | No              |
+| Abstractive Summarization  | No       | Yes      | Yes             |
+| Extractive Summarization   | Yes      | Maybe    | Yes             |
+| Chat                       | No       | Yes      | No              |
+| Forecasting                | No       | No       | No              |
+| Code                       | No       | Yes      | Yes             |
+
+This categorization helps in selecting the appropriate model for specific NLP tasks.
