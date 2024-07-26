@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/somritdasgupta/aide/issues"
   },
-  "homepage": "https://somritdasgupta.github.io/aide",
+  "homepage": "https://aide-docs.vercel.app",
   "dependencies": {
     "autoprefixer": "^10.4.19",
     "next": "^13.5.6",

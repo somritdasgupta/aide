@@ -18,19 +18,15 @@ The documentation is organized into the following sections:
 
 ## Getting Started
 
-To get started with Aide, please refer to the [Aide Documentation](https://somritdagupta.github.io/aide) for a full overview and detailed guides.
+To get started with Aide, please refer to the [Aide Documentation ↗](https://aide-docs.vercel.app) for a full overview and detailed guides.
 
 ## Contributing
 
-Contributions to the documentation are welcome! If you have suggestions or improvements, please submit a pull request or open an issue on the [GitHub repository](https://github.com/somritdagupta/aide).
+Contributions to the documentation are welcome! If you have suggestions or improvements, please submit a pull request or open an issue on the [GitHub repository ↗](https://github.com/somritdagupta/aide).
 
 ## License
 
-Aide is licensed under the MIT License. 
-
-## Live Site
-
-For the live version of the documentation, visit [somritdasgupta.github.io/aide](https://somritdasgupta.github.io/aide).
+Aide is licensed under the MIT License.
 
 ---
 
