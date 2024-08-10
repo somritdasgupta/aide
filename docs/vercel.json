@@ -1,0 +1,18 @@
+{
+  "public": true,
+  "builds": [
+    {
+      "src": "docs/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "docs"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "docs/$1"
+    }
+  ]
+}
