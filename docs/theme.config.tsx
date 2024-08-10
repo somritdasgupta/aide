@@ -9,7 +9,7 @@ const config = {
   docsRepositoryBase: 'https://github.com/somritdasgupta/aide/tree/main/docs',
   useNextSeoProps() {
     const { asPath } = useRouter()
-    if (asPath !== '/') {
+    if (asPath !== '/docs/pages/') {
       return {
         titleTemplate: '%s | aiDe'
       }
@@ -18,6 +18,6 @@ const config = {
   footer: {
     text: 'aiDe by Somrit Dasgupta',
   },
-} as any; // Using `any` to bypass type checking
+} as any;
 
 export default config;
