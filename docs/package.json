@@ -18,14 +18,14 @@
   },
   "homepage": "https://aide-docs.vercel.app",
   "dependencies": {
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.20",
     "next": "^13.5.6",
     "nextra": "latest",
     "nextra-theme-docs": "^2.13.4",
     "postcss-import": "^16.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwindcss": "^3.4.7"
+    "tailwindcss": "^3.4.9"
   },
   "devDependencies": {
     "@types/node": "18.11.10",
