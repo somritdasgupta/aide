@@ -1,18 +1,18 @@
 {
-  "public": true,
+  "version": 2,
   "builds": [
     {
       "src": "docs/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "docs"
+        "distDir": "docs/.next"
       }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "docs/$1"
+      "dest": "/docs/$1"
     }
   ]
 }
