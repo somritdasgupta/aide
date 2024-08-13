@@ -1,0 +1,210 @@
+# Git Configuration
+
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Getting Started with Git](#getting-started-with-git)
+   - [First-Time Git Setup](#first-time-git-setup)
+   - [Forking and Cloning the Aide Repository](#forking-and-cloning-the-aide-repository)
+3. [Setting Up Your Development Environment](#setting-up-your-development-environment)
+4. [Basic Git Operations](#basic-git-operations)
+   - [Checking Status](#checking-status)
+   - [Making Changes](#making-changes)
+   - [Committing Changes](#committing-changes)
+   - [Pushing to Your Fork](#pushing-to-your-fork)
+5. [Creating Your First Pull Request](#creating-your-first-pull-request)
+6. [Advanced Git Workflow for Aide](#advanced-git-workflow-for-aide)
+   - [Branching Strategy](#branching-strategy)
+   - [Keeping Your Fork Updated](#keeping-your-fork-updated)
+7. [Advanced Git Commands and Techniques](#advanced-git-commands-and-techniques)
+   - [Interactive Rebase](#interactive-rebase)
+   - [Cherry-Picking](#cherry-picking)
+   - [Stashing Changes](#stashing-changes)
+   - [Tagging Releases](#tagging-releases)
+8. [Resolving Merge Conflicts](#resolving-merge-conflicts)
+9. [Code Review Process](#code-review-process)
+10. [Continuous Integration and GitHub Actions](#continuous-integration-and-github-actions)
+11. [Best Practices for Aide Development](#best-practices-for-aide-development)
+12. [Troubleshooting](#troubleshooting)
+    - [Common Issues for Beginners](#common-issues-for-beginners)
+    - [Advanced Troubleshooting](#advanced-troubleshooting)
+13. [Contributing to Aide's Documentation](#contributing-to-aides-documentation)
+14. [Further Reading and Resources](#further-reading-and-resources)
+
+## Introduction
+
+Welcome to the comprehensive Git guide for Aide! This document is designed to help contributors of all experience levels work effectively with the Aide project. Whether you're new to Git or an experienced developer, you'll find valuable information to help you contribute to Aide, a powerful web extension that enhances browsing experiences with AI-powered features.
+
+## Getting Started with Git
+
+### First-Time Git Setup
+
+1. Install Git from the [official website](https://git-scm.com/).
+2. Configure your Git identity:
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "youremail@example.com"
+   ```
+3. Set your preferred editor:
+   ```bash
+   git config --global core.editor "code --wait"  # for Visual Studio Code
+   ```
+4. (Optional) Set up SSH for GitHub:
+   - Generate an SSH key: `ssh-keygen -t ed25519 -C "your_email@example.com"`
+   - Add the SSH key to your GitHub account: [GitHub SSH setup guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
+
+### Forking and Cloning the Aide Repository
+
+1. Go to the [Aide GitHub repository](https://github.com/somritdasgupta/aide).
+2. Click the "Fork" button to create your own copy of the repository.
+3. Clone your fork locally:
+   ```bash
+   git clone https://github.com/your-username/aide.git
+   cd aide
+   ```
+4. Add the original Aide repository as an upstream remote:
+   ```bash
+   git remote add upstream https://github.com/somritdasgupta/aide.git
+   ```
+
+## Setting Up Your Development Environment
+
+1. Install Node.js (v18 or higher) from the [official website](https://nodejs.org/).
+2. Install project dependencies:
+   ```bash
+   npm install
+   ```
+3. Install Ollama (Local AI Provider) following the [official guide](https://ollama.ai/).
+
+## Basic Git Operations
+
+### Checking Status
+```bash
+git status
+```
+
+### Making Changes
+1. Create a new branch for your feature or bugfix:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+2. Make your changes in your preferred code editor.
+
+### Committing Changes
+1. Stage your changes:
+   ```bash
+   git add .
+   ```
+2. Commit with a descriptive message:
+   ```bash
+   git commit -m "Add image recognition feature to sidebar"
+   ```
+
+### Pushing to Your Fork
+```bash
+git push origin feature/your-feature-name
+```
+
+## Creating Your First Pull Request
+
+1. Go to your fork on GitHub.
+2. Click "Compare & pull request" next to your recently pushed branch.
+3. Fill out the pull request template with a detailed description of your changes.
+4. Submit the pull request for review.
+
+## Advanced Git Workflow for Aide
+
+### Branching Strategy
+- `main`: The primary branch containing the stable version of Aide.
+- `feature/*`: For new features.
+- `bugfix/*`: For bug fixes.
+- `release/*`: For preparing new releases.
+
+### Keeping Your Fork Updated
+```bash
+git fetch upstream
+git checkout main
+git merge upstream/main
+git push origin main
+```
+
+## Advanced Git Commands and Techniques
+
+### Interactive Rebase
+Clean up your commits before submitting a PR:
+```bash
+git rebase -i HEAD~<number of commits>
+```
+
+### Cherry-Picking
+Apply specific commits from one branch to another:
+```bash
+git cherry-pick <commit-hash>
+```
+
+### Stashing Changes
+Temporarily store changes:
+```bash
+git stash
+git stash pop
+```
+
+### Tagging Releases
+```bash
+git tag -a v1.0.0 -m "Release version 1.0.0"
+git push origin v1.0.0
+```
+
+## Resolving Merge Conflicts
+
+1. Update your branch with the latest main:
+   ```bash
+   git checkout main
+   git pull upstream main
+   git checkout your-branch
+   git merge main
+   ```
+2. Resolve conflicts manually in your code editor.
+3. Stage the resolved files: `git add <resolved-files>`
+4. Complete the merge: `git commit`
+
+## Code Review Process
+
+1. Respond to reviewer comments promptly.
+2. Make requested changes in new commits.
+3. Push updates to your branch; the PR will update automatically.
+4. Use "Request review" when you're ready for another look.
+
+## Continuous Integration and GitHub Actions
+
+- Aide uses GitHub Actions for CI/CD.
+- Ensure your changes pass all automated checks.
+- Review the `.github/workflows` directory to understand the CI process.
+
+## Best Practices for Aide Development
+
+1. Follow the existing code style and use ESLint/Prettier.
+2. Write clear, concise commit messages.
+3. Keep pull requests focused on a single feature or fix.
+4. Update documentation alongside code changes.
+5. Add or update tests for your changes.
+
+## Troubleshooting
+
+### Common Issues for Beginners
+- **"Permission denied" when pushing**: Ensure you're pushing to your fork, not the main Aide repository.
+- **Changes not showing up**: Check if you're on the correct branch with `git branch`.
+
+### Advanced Troubleshooting
+- **Recovering lost commits**: Use `git reflog` to find and restore lost commits.
+- **Debugging Git issues**: Use `git log`, `git show`, and `git diff` for investigation.
+
+## Contributing to Aide's Documentation
+
+1. Documentation lives in the `docs/` directory.
+2. Follow the same PR process for documentation changes.
+3. Use clear, concise language and provide examples where possible.
+
+## Further Reading and Resources
+
+- [Official Git Documentation](https://git-scm.com/doc)
+- [GitHub Guides](https://guides.github.com/)

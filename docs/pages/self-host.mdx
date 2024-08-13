@@ -1,0 +1,158 @@
+# Self-Hosting Aide Locally
+
+To run a local instance of Aide, follow these detailed steps. This guide ensures that you can set up and manage Aide directly on your machine, providing full control over your environment.
+
+### Prerequisites
+
+Ensure you have the following software installed:
+
+- **Node.js** (v18 or higher): Required for running the server and building the extension.
+[Installation ↗](https://nodejs.org/)
+- **npm**: Node Package Manager, used to install dependencies.
+- **Ollama**: Local AI provider for running AI models.
+[Guide ↗](https://aide-docs.vercel.app/Ollama/installation)
+
+### Steps to Self-Host Aide
+
+#### 1. Clone the Repository
+
+Start by cloning the Aide repository to your local machine.
+
+**For Linux/MacOS:**
+```bash
+git clone https://github.com/somritdasgupta/aide.git
+cd aide
+```
+
+**For Windows (Command Prompt or PowerShell):**
+```bash
+git clone https://github.com/somritdasgupta/aide.git
+cd aide
+```
+
+#### 2. Configure Environment Variables
+
+Edit the `.env` file to include your Ollama API key and any other necessary settings.
+
+**For Linux/MacOS:**
+
+- Open the `.env` file using a text editor like Nano or Vim.
+
+  **Using Nano:**
+  ```bash
+  nano .env
+  ```
+
+  **Using Vim:**
+  ```bash
+  vim .env
+  ```
+
+**For Windows (using Notepad):**
+
+- Open the `.env` file with Notepad or any other text editor.
+  ```plaintext
+  notepad .env
+  ```
+
+In the `.env` file, add your Ollama API key and other relevant configurations:
+
+```plaintext
+OLLAMA_API_KEY=your_ollama_api_key
+OTHER_API_KEY=your_other_api_key
+```
+
+#### 3. Install Dependencies
+
+Install the required Node.js packages.
+
+**For Linux/MacOS/Windows:**
+```bash
+npm install
+```
+
+This command installs all dependencies listed in the `package.json` file.
+
+#### 4. Build the Extension
+
+Compile the Aide extension for your preferred browser.
+
+**For Chrome:**
+```bash
+npm run build
+```
+
+**For Firefox:**
+```bash
+npm run build:firefox
+```
+
+This step prepares the extension files for browser integration.
+
+#### 5. Load the Extension
+
+**For Chrome:**
+
+1. Open the Extension Management page by navigating to `chrome://extensions`.
+2. Enable Developer Mode by clicking the toggle switch next to Developer mode.
+3. Click the `Load unpacked` button and select the `build` directory.
+
+**For Firefox:**
+
+1. Open Firefox and navigate to `about:addons`.
+2. Click on the Extensions tab.
+3. Click "Manage Your Extensions".
+4. Click "Load Temporary Add-on" and select the `manifest.json` file from the `build` directory.
+
+#### 6. Launch the Web UI
+
+After loading the extension, access the Aide Web UI by clicking on the extension icon in your browser. This will open a new tab with the Web UI.
+
+- **Default Keyboard Shortcut for Web UI:** `Ctrl+Shift+L`
+
+#### 7. Manage and Monitor
+
+**To view application logs:**
+
+- **For Linux/MacOS/Windows:**
+  ```bash
+  npm start
+  ```
+
+This command starts the local server, allowing you to monitor the application’s activity.
+
+#### 8. Stop the Server (Optional)
+
+To stop the local server, you can use `Ctrl+C` in the terminal where the server is running.
+
+#### 9. Updating Aide
+
+To update your local instance:
+
+1. **Pull the Latest Changes:**
+   ```bash
+   git pull origin main
+   ```
+
+2. **Rebuild the Extension:**
+   ```bash
+   npm run build
+   ```
+
+   **For Firefox:**
+   ```bash
+   npm run build:firefox
+   ```
+
+3. **Restart the Server:**
+   ```bash
+   npm start
+   ```
+
+### Troubleshooting
+
+- **Issue:** Server does not start or shows errors.
+  - **Solution:** Check the terminal for error messages. Ensure Node.js and npm are correctly installed and that the `.env` file contains valid API keys.
+
+- **Issue:** Cannot access the Web UI.
+  - **Solution:** Verify that the extension is loaded correctly in your browser and ensure there are no port conflicts or network issues.

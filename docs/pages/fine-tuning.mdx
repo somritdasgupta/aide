@@ -1,0 +1,213 @@
+# Fine-Tuning
+## Introduction
+
+Aide offers a set of fine-tuning parameters that allow users to customize the behavior and output of the underlying language model. By adjusting these parameters, you can control various aspects of the generated responses, from their creativity to their predictability. This documentation provides an in-depth look at each parameter, its effects, and how to use it effectively.
+
+## Available Parameters
+
+### 1. Temperature
+
+#### Description
+Temperature controls the randomness of the model's outputs. It affects the probability distribution over the next token choices.
+
+#### Technical Details
+- **Range**: 0.0 to 1.0
+- **Default**: 0.7
+- **Internal Mechanism**: 
+  - The temperature value is used to scale the logits (unnormalized prediction scores) before applying softmax.
+  - A lower temperature sharpens the probability distribution, while a higher temperature flattens it.
+
+#### Effects
+- **Low Temperature (0.1 - 0.3)**:
+  - More deterministic outputs
+  - Higher probability tokens are strongly favored
+  - Responses tend to be more focused and coherent
+- **Medium Temperature (0.4 - 0.7)**:
+  - Balanced between deterministic and random
+  - Good for general-purpose tasks
+- **High Temperature (0.8 - 1.0)**:
+  - More random and diverse outputs
+  - Can lead to more creative but potentially less coherent responses
+
+#### Use Cases
+- **Low**: Factual Q&A, specific instructions, code generation
+- **Medium**: General conversation, creative writing with some constraints
+- **High**: Brainstorming, poetry, highly creative tasks
+
+#### Implementation Note
+When adjusting temperature, consider its interaction with Top K and Top P sampling methods.
+
+### 2. Top K
+
+#### Description
+Top K sampling limits the number of possible next tokens the model considers at each step of generation.
+
+#### Technical Details
+- **Range**: 1 to vocabulary size (typically around 50,000)
+- **Default**: 50
+- **Internal Mechanism**:
+  - After calculating token probabilities, only the K most likely tokens are considered.
+  - The probabilities of these K tokens are then renormalized.
+
+#### Effects
+- **Low K (1 - 10)**:
+  - Very restrictive, only the most probable tokens are considered
+  - Can lead to repetitive or overly safe outputs
+- **Medium K (20 - 100)**:
+  - Balances between focused and diverse outputs
+  - Suitable for most general-purpose applications
+- **High K (>100)**:
+  - Allows for more diverse token choices
+  - Can introduce less common or relevant tokens in the output
+
+#### Use Cases
+- **Low**: When you need very predictable and safe outputs
+- **Medium**: General text generation, conversational AI
+- **High**: Creative writing, exploring less common language constructs
+
+#### Implementation Note
+Top K is often used in conjunction with Temperature. A lower Temperature with a moderate Top K can provide focused yet slightly varied outputs.
+
+### 3. Top P (Nucleus Sampling)
+
+#### Description
+Top P, also known as nucleus sampling, dynamically limits the set of tokens considered based on their cumulative probability.
+
+#### Technical Details
+- **Range**: 0.0 to 1.0
+- **Default**: 0.95
+- **Internal Mechanism**:
+  - Tokens are sorted by probability in descending order.
+  - The smallest set of tokens whose cumulative probability exceeds the Top P value is selected.
+  - Only these tokens are considered in the final sampling step.
+
+#### Effects
+- **Low P (0.1 - 0.5)**:
+  - More focused and conservative outputs
+  - Reduces the chance of selecting low-probability tokens
+- **Medium P (0.6 - 0.9)**:
+  - Balances between focused and diverse outputs
+  - Suitable for most general-purpose applications
+- **High P (0.91 - 1.0)**:
+  - Allows for more diverse and potentially unexpected token choices
+  - Can lead to more creative but possibly less coherent outputs
+
+#### Use Cases
+- **Low**: Factual responses, specific task completion
+- **Medium**: General conversation, creative writing with some constraints
+- **High**: Brainstorming, generating diverse ideas
+
+#### Implementation Note
+Top P can be used alongside Temperature and Top K. It's particularly useful when you want to dynamically adjust the diversity of outputs based on the underlying probability distribution.
+
+### 4. Num Context
+
+#### Description
+Num Context specifies the number of previous conversation exchanges or tokens to consider when generating a response.
+
+#### Technical Details
+- **Range**: 1 to model's maximum context length (e.g., 2048 for GPT-2, 4096 for GPT-3)
+- **Default**: Varies based on model and application
+- **Internal Mechanism**:
+  - Determines how many previous tokens are fed into the model as context.
+  - Affects the model's ability to maintain coherence and relevance across longer interactions.
+
+#### Effects
+- **Low (1 - 100 tokens)**:
+  - Responses may lack broader context
+  - Suitable for short, independent queries
+- **Medium (101 - 1000 tokens)**:
+  - Balances context retention with computational efficiency
+  - Good for most conversational applications
+- **High (>1000 tokens)**:
+  - Enables the model to reference information from much earlier in the conversation
+  - Can lead to more coherent long-form responses
+  - May increase computational load and response time
+
+#### Use Cases
+- **Low**: Quick Q&A, simple instructions
+- **Medium**: General conversation, multi-turn dialogues
+- **High**: Long-form content generation, complex problem-solving tasks
+
+#### Implementation Note
+Increasing Num Context can significantly impact model performance and response time. Balance the need for context with computational constraints.
+
+### 5. Seed
+
+#### Description
+The seed is a random number used to initialize the model's internal state, ensuring reproducibility of outputs.
+
+#### Technical Details
+- **Range**: Any integer value
+- **Default**: Random or None (indicating a random seed each time)
+- **Internal Mechanism**:
+  - Initializes the random number generator used in the sampling process.
+  - Ensures that given the same input and parameters, the model produces the same output.
+
+#### Effects
+- **Fixed Seed**:
+  - Produces consistent outputs for the same input and parameters
+  - Useful for debugging, testing, and ensuring reproducibility
+- **Changing Seed**:
+  - Produces different outputs even with the same input and other parameters
+  - Useful for generating diverse responses or creative applications
+
+#### Use Cases
+- **Fixed**: Debugging, A/B testing, ensuring consistency in critical applications
+- **Changing**: Creative writing, generating multiple options for a single prompt
+
+#### Implementation Note
+When using a fixed seed, be aware that it will produce the same output every time unless other parameters or the input change. This can be both an advantage and a limitation depending on your use case.
+
+## Effective Usage Strategies
+
+### Balancing Creativity and Coherence
+- Start with default values and adjust incrementally.
+- For creative tasks, increase Temperature and Top P while keeping a moderate Top K.
+- For factual or structured outputs, lower Temperature and Top P, and consider a lower Top K.
+
+### Optimizing for Different Tasks
+1. **Factual Q&A**:
+   - Low Temperature (0.1 - 0.3)
+   - Low Top P (0.1 - 0.5)
+   - Moderate Top K (20 - 50)
+   - Higher Num Context if the question requires broader information
+
+2. **Creative Writing**:
+   - Higher Temperature (0.7 - 0.9)
+   - Higher Top P (0.9 - 1.0)
+   - Higher Top K (100+)
+   - Experiment with different Seeds for diverse outputs
+
+3. **Conversational AI**:
+   - Moderate Temperature (0.5 - 0.7)
+   - Moderate Top P (0.7 - 0.9)
+   - Moderate Top K (50 - 100)
+   - Adjust Num Context based on desired conversation depth
+
+4. **Code Generation**:
+   - Lower Temperature (0.2 - 0.5)
+   - Lower Top P (0.5 - 0.7)
+   - Moderate Top K (30 - 70)
+   - Higher Num Context for maintaining code structure
+
+### Troubleshooting Common Issues
+1. **Repetitive Outputs**:
+   - Increase Temperature and Top P
+   - Consider increasing Top K
+
+2. **Incoherent Responses**:
+   - Lower Temperature and Top P
+   - Increase Num Context
+
+3. **Off-Topic Responses**:
+   - Decrease Top K and Top P
+   - Increase Num Context to provide more relevant information
+
+4. **Inconsistent Behavior**:
+   - Use a fixed Seed for debugging
+   - Gradually adjust one parameter at a time to isolate the issue
+
+## Conclusion
+
+Fine-tuning the Aide model's parameters allows for precise control over the generated responses. By understanding and effectively using these parameters, you can tailor the model's output to suit a wide range of applications, from creative writing to structured data generation. Remember that the optimal settings may vary depending on your specific use case, so don't hesitate to experiment and find the perfect balance for your needs.

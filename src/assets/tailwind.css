@@ -1,0 +1,128 @@
+@font-face {
+  font-family: "Arimo";
+  src: url("fonts/Arimo.ttf");
+  font-display: swap;
+}
+
+.arimo {
+  font-family: "Arimo", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.ant-select-selection-search-input {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+@keyframes gradient-border {
+  0% {
+    border-image-source: linear-gradient(
+      45deg,
+      #f79533,
+      #f37055,
+      #ef4e7b,
+      #a166ab
+    );
+  }
+  50% {
+    border-image-source: linear-gradient(45deg, #ef4e7b, #a166ab);
+  }
+  74% {
+    border-image-source: linear-gradient(60deg, #203a6e, #1098ad);
+  }
+  100% {
+    border-image-source: linear-gradient(
+      45deg,
+      #f79533,
+      #f37055,
+      
+      #ef4e7b,
+      #a166ab
+    );
+  }
+}
+
+.animated-gradient-border {
+  border: 3px solid;
+  border-image-slice: 1;
+  animation: gradient-border 3s infinite;
+  border-radius: 10px;
+}
+
+/* Hide scrollbar by default */
+.custom-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Show scrollbar on hover */
+.custom-scrollbar:hover {
+  scrollbar-width: thin;
+  -ms-overflow-style: auto;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar {
+  display: block;
+  width: 8px;
+}
+
+/* Custom scrollbar styles for light theme */
+.custom-scrollbar:hover::-webkit-scrollbar-track {
+  @apply bg-gray-50;
+  border-radius: 4px;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  @apply bg-gray-300;
+  border-radius: 4px;
+  transition: background 0.5s ease;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Custom scrollbar styles for dark theme */
+.dark .custom-scrollbar:hover::-webkit-scrollbar-track {
+  background-color: #021624;
+}
+
+.dark .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: #404040;
+}
+
+.dark .custom-scrollbar:hover::-webkit-scrollbar-thumb:hover {
+  background-color: #525252;
+}
+
+/* For Firefox */
+.custom-scrollbar {
+  scrollbar-color: theme('colors.gray.300') theme('colors.gray.50');
+  scrollbar-width: thin;
+}
+
+.dark .custom-scrollbar {
+  scrollbar-color: #404040 #262626;
+}

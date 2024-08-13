@@ -1,0 +1,14 @@
+{
+    "extName": {
+        "message": "aiDe"
+    },
+    "extDescription": {
+        "message": "An intuitive and fast feature-rich interface for your local LLMs from ollama"
+    },
+    "openSidePanelToChat": {
+        "message": "aiDe SideKick"
+    },
+    "openOptionToChat": {
+        "message": "Open aiDe"
+    }
+}

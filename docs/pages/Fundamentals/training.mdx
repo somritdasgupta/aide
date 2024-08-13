@@ -1,0 +1,43 @@
+# Training and Decoding of Large Language Models
+
+Training and decoding are fundamental processes in the lifecycle of Large Language Models (LLMs). This chapter explores these processes in detail.
+
+## Training
+
+Training an LLM involves exposing it to extensive text data and adjusting its parameters to improve performance in predicting and generating text.
+
+### Domain-Adaption
+
+Domain-adaption refers to modifying a model to perform better on tasks or topics outside its original training domain. This often involves additional training on domain-specific data.
+
+### Training Styles
+
+| Training Style          | Modifies     | Data                    | Summary                                    |
+|-------------------------|--------------|-------------------------|--------------------------------------------|
+| Fine-Tuning (FT)        | All parameters | Labeled, task-specific | Traditional method involving complete re-training. |
+| Parameter Efficient FT  | Few, new parameters | Labeled, task-specific | Focuses on learning new parameters while keeping most of the original model fixed. |
+| Soft Prompting          | Few, new parameters | Labeled, task-specific | Uses learnable prompt parameters to guide the model. |
+| (Continued) Pre-Training | All parameters | Unlabeled               | Involves further training on large corpora to enhance model capabilities. |
+
+## Decoding
+
+Decoding is the process of generating text from a trained model. It involves selecting words from the model’s vocabulary to form coherent and contextually appropriate responses.
+
+### Greedy Decoding
+
+Greedy decoding picks the word with the highest probability at each step, leading to deterministic and potentially repetitive outputs.
+
+### Non-Deterministic Decoding
+
+Non-deterministic decoding introduces randomness, allowing the model to explore various high-probability options. This can result in more diverse and creative outputs.
+
+### Temperature
+
+Temperature is a parameter that influences the randomness of the word selection process during decoding.
+
+- **Low Temperature**: Results in more predictable and focused outputs.
+- **High Temperature**: Increases randomness, allowing for more diverse and creative responses.
+
+## References
+
+- [Greedy vs. Non-Deterministic Decoding](https://arxiv.org/abs/1805.08960)

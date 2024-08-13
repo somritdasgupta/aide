@@ -1,0 +1,245 @@
+# Core Capabilities
+Aide provides access to various pretrained foundational models, allowing users to leverage advanced capabilities for diverse tasks.
+
+### Prompt Engineering and LLM Customization
+Aide supports prompt engineering and customization of Large Language Models (LLMs) to tailor responses to specific needs.
+
+### Fine-tuning and Inference
+Users can fine-tune pretrained models and perform inference locally for customized tasks and efficient text generation.
+
+### Local Instance Architecture
+Aide operates using local instances for model hosting and fine-tuning, enabling efficient management of computational resources.
+
+## How Does Aide Work?
+
+### Text Input -> Aide Service -> Text Output
+
+Aide is designed to process and generate human language efficiently at a large scale, suitable for a variety of use cases including:
+
+- Text Generation
+- Summarization
+- Data Extraction
+- Classification
+- Conversation
+
+# Pretrained Foundational Models
+
+## Text Generation Models
+Text generation models are designed to generate coherent and contextually relevant text based on given prompts or instructions. This document outlines various models available through Ollama, including both traditional language models and multimodal options.
+
+### Llama 2
+
+Llama 2 is a family of open-source large language models developed by Meta AI. It's available in various sizes and is suitable for a wide range of natural language processing tasks.
+
+- **Variants**: 7B, 13B, 70B parameters
+- **Use cases**: General text generation, question-answering, summarization
+
+```bash
+ollama run llama2
+```
+
+### Mistral
+
+Mistral is a powerful and efficient language model that offers strong performance across various tasks.
+
+- **Variants**: 7B, 8x7B (Mixtral)
+- **Key features**: Efficient architecture, strong performance on diverse tasks
+
+```bash
+ollama run mistral
+```
+
+### Phi-2
+
+Phi-2 is a small language model developed by Microsoft Research, known for its impressive performance despite its compact size.
+
+- **Size**: 2.7B parameters
+- **Key features**: Compact size, efficient performance
+
+```bash
+ollama run phi
+```
+
+### Stable Beluga
+
+A fine-tuned version of Llama that excels in instruction-following and conversational tasks.
+
+- **Base model**: Llama
+- **Specialization**: Instruction-following, conversation
+
+```bash
+ollama run stable-beluga
+```
+
+### Orca 2
+
+Another Llama-based model series optimized for reasoning and task completion.
+
+- **Base model**: Llama
+- **Specialization**: Reasoning, task completion
+
+```bash
+ollama run orca2
+```
+
+### Yi
+
+A series of large language models developed by 01.AI, available in various sizes.
+
+- **Variants**: 6B to 34B parameters
+- **Use cases**: General text generation, analysis
+
+```bash
+ollama run yi
+```
+
+### Neural Chat
+
+An instruction-following model based on Intel's neural processing units, optimized for conversational AI applications.
+
+- **Specialization**: Conversational AI
+- **Key features**: Optimized for Intel NPUs
+
+```bash
+ollama run neural-chat
+```
+
+## Multimodal Models
+
+These models extend beyond text, incorporating visual understanding capabilities.
+
+### LLaVA (Large Language and Vision Assistant)
+
+LLaVA combines Llama 2 with visual understanding capabilities.
+
+- **Base model**: Llama 2
+- **Additional capability**: Visual processing
+
+```bash
+ollama run llava
+```
+
+### Bakllava
+
+A multimodal model based on Llama that can process both text and images.
+
+- **Base model**: Llama
+- **Additional capability**: Image processing
+
+```bash
+ollama run bakllava
+```
+
+### CLIP
+
+While not a full LLM, CLIP is a multimodal model that can understand relationships between images and text.
+
+- **Key feature**: Image-text relationship understanding
+- **Use cases**: Image classification, visual search
+
+```bash
+ollama run clip
+```
+
+## Usage Notes
+
+1. Ensure you have Ollama installed on your system.
+2. Use the `ollama run` command followed by the model name to start interaction.
+3. For multimodal models, make sure you have the necessary setup to input both text and images.
+4. Consider the trade-offs between model size, performance, and resource requirements when choosing a model for your specific use case.
+
+Remember to check the Ollama documentation for the most up-to-date information on available models and their usage.
+
+### Text Summarization
+Summarize text according to specific formats, lengths, and tones.
+
+**Models:**
+- **Command**: Utilized for generating summaries with user-specified parameters.
+
+### Embedding Models
+Convert text into numerical vector embeddings for tasks like semantic search and classification.
+
+**Models:**
+- **embed-english-v3.0 / embed-multilingual-v3.0**: Provides vector embeddings for English and multilingual text.
+- **embed-english-light-v3.0 / embed-multilingual-light-v3.0**: A smaller, faster version for efficient embedding.
+- **embed-english-light-v2.0**: Previous generation model for English text.
+
+## Fine-tuning and Inference in Aide
+
+### Fine-tuning Workflow
+
+1. **Create a Local Instance**: Set up a local environment for model fine-tuning.
+2. **Gather Training Data**: Prepare and organize your domain-specific dataset.
+3. **Kickstart Fine-tuning**: Initiate the fine-tuning process on your local instance.
+4. **Generate Fine-tuned Model**: The model is refined based on the provided data.
+
+### Inference Workflow
+
+1. **Create a Local Instance**: Set up an instance to host the fine-tuned model.
+2. **Create Endpoint**: Define a local endpoint for the model.
+3. **Serve Model**: Handle inference requests and generate responses based on the fine-tuned model.
+
+## T-Few Fine-tuning
+
+**T-Few Fine-tuning** is an efficient method that updates a subset of the model's weights, resulting in reduced training time and cost compared to traditional fine-tuning. It involves:
+
+- Utilizing initial weights and annotated data.
+- Generating a supplementary set of model weights.
+- Confining updates to specific transformer layers.
+
+### Fine-tuning Parameters
+
+- **Total Training Epochs**: Number of training iterations (default: 3).
+- **Batch Size**: Number of samples processed before updating parameters (default: 8 for Command).
+- **Learning Rate**: Rate at which parameters are updated (default: 0.1 for T-Few).
+- **Early Stopping Threshold**: Minimum improvement required to avoid premature termination (default: 0.01).
+- **Early Stopping Patience**: Tolerance for stagnation before stopping training (default: 6).
+- **Log Model Metrics Interval**: Frequency of logging model metrics (default: 10 steps).
+
+## Prompt Engineering
+
+### Prompt
+The initial text provided to the model.
+
+**Prompt Engineering** involves refining prompts to elicit desired responses, leveraging techniques such as in-context learning and few-shot prompting.
+
+### In-context Learning and Few-shot Prompting
+
+- **In-context Learning**: Provides context and instructions within the prompt.
+- **Few-shot Prompting**: Includes examples in the prompt to guide the model’s responses.
+
+### Advanced Prompting Strategies
+
+- **Chain-of-Thought**: Incorporates reasoning steps in the prompt to improve response quality.
+- **Zero-Shot Chain-of-Thought**: Uses reasoning without explicit examples.
+
+## Retrieval Augmented Generation (RAG)
+
+**RAG** optimizes model output by querying external knowledge bases without altering the underlying model. It involves:
+
+- **Few-shot Prompting**: Simple and quick to implement, but may increase latency.
+- **Fine-tuning**: Enhances model performance for specific tasks, but requires labeled datasets.
+- **RAG**: Effective for integrating up-to-date information and grounding responses in current data.
+
+### Choosing the Right Approach
+
+1. **Start with a Simple Prompt**: Test and refine basic prompts.
+2. **Add Few-shot Prompting**: Incorporate examples for improved performance.
+3. **Utilize RAG**: Integrate retrieval mechanisms for enhanced context and accuracy.
+4. **Fine-tune the Model**: Apply fine-tuning for domain-specific needs.
+5. **Optimize Retrieval**: Fine-tune retrieval processes for more accurate results.
+
+## Local Instance Setup
+
+### Instance Configuration
+Set up local instances based on your needs for fine-tuning and inference. Instances can be scaled according to model requirements and expected throughput.
+
+- **Fine-tuning Cost**: Cost is metaphoric with local running hardware and bandwith based on the number of instance hours and the fine-tuning duration with the parameterised model being used on the local machine.
+- **Hosting Cost**: Reflects the cost of maintaining instances for inference in cloud based solution during scaling up.
+
+### Security
+Aide ensures that customer data and models are isolated and secure within the local instance environment, with access restricted to the customer’s tenancy.
+
+---
+
+Feel free to adjust any sections or details as needed!

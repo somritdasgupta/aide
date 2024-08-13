@@ -1,0 +1,131 @@
+
+# Retrieval Augmented Generation (RAG) Integration with Aide
+
+## Introduction
+
+Retrieval Augmented Generation (RAG) enhances text generation by incorporating external information sources, enabling Aide to deliver more accurate and contextually relevant responses. This guide explains how to configure and utilize RAG within Aide, leveraging embedding models from Ollama and allowing the upload of custom knowledge bases.
+
+## Overview
+
+### What is RAG?
+
+RAG combines a retrieval mechanism with a generative model to improve text generation. The framework consists of three main components:
+
+- **Retriever**: Extracts relevant information from a large corpus.
+- **Ranker**: Evaluates and prioritizes the retrieved information.
+- **Generator**: Produces coherent and contextually accurate text based on the retrieved information.
+
+### RAG Framework Components
+
+1. **Retriever**:
+   - **Function**: Sources relevant documents or data from a large corpus.
+   - **Purpose**: Provides contextually relevant, up-to-date information that may not be present in the model’s pre-trained knowledge.
+
+2. **Ranker**:
+   - **Function**: Evaluates and ranks the retrieved information.
+   - **Purpose**: Ensures that the generation system receives the most pertinent and high-quality data.
+
+3. **Generator**:
+   - **Function**: Generates human-like text using the ranked information and user’s query.
+   - **Purpose**: Ensures responses are factually accurate, coherent, and styled like human language.
+
+## Configuring RAG in Aide
+
+### 1. Prerequisites
+
+Before integrating RAG with Aide, ensure you have:
+
+- **Aide Software**: Installed and operational (see Aide Installation Guide).
+- **Ollama Account**: For accessing embedding models (see Ollama Installation Guide).
+- **Knowledge Base Files**: PDFs or other documents that you wish to upload.
+
+### 2. Enabling RAG
+
+1. **Open Aide Settings**:
+   - Navigate to the settings section of the Aide software by clicking the gear icon on the dashboard.
+
+2. **Configure RAG Integration**:
+   - Locate the RAG Integration tab.
+   - Toggle the switch to enable RAG functionality.
+
+3. **Set Up Ollama Embedding Models**:
+   - Under Embedding Models, select the desired models from Ollama.
+   - Configure parameters such as temperature, top-k, and top-p based on your needs.
+
+4. **Upload Knowledge Base**:
+   - Click the “Upload Knowledge Base” button.
+   - Select and upload your PDF or document files.
+   - The files will be processed and indexed for use with the RAG framework.
+
+### 3. Configuring the RAG Pipeline
+
+1. **Ingestion**:
+   - **Documents**: Upload and process documents that form your knowledge base.
+   - **Chunks**: Divide the documents into manageable chunks for efficient retrieval.
+   - **Embedding**: Generate vector embeddings for the document chunks using Ollama’s embedding models.
+   - **Index**: Create an index of the document embeddings for fast retrieval.
+
+2. **Retrieval**:
+   - **Query**: Input queries to retrieve relevant documents from the indexed database.
+   - **Index**: Search within the indexed embeddings.
+   - **Top K Results**: Retrieve the top K most relevant documents based on the query.
+
+3. **Generation**:
+   - **Top K Results**: Use the top K results as context for generating responses.
+   - **Response to User**: Generate and present a response based on the retrieved documents and the user’s query.
+
+## RAG Techniques in Aide
+
+### RAG Sequence
+
+- **Function**: Retrieves a set of documents for each query and generates a cohesive response using all documents.
+- **Usage**: Suitable for generating detailed responses where multiple documents provide a comprehensive view.
+
+### RAG Token
+
+- **Function**: Retrieves relevant documents for each part of the response (sentence or word) and constructs the response incrementally.
+- **Usage**: Ideal for fine-grained text generation tasks where each segment of the text needs specific contextual information.
+
+## Vector Databases Integration
+
+### What is a Vector Database?
+
+A vector database stores and manages high-dimensional vectors that represent the semantic content of documents. It supports efficient similarity search and retrieval based on vector embeddings.
+
+### Embedding Distance
+
+- **Dot Product**: Measures the magnitude and direction similarity between vectors.
+- **Cosine Distance**: Measures the angular distance between vectors.
+
+### Vector Database Workflow
+
+1. **Vectors**: Convert documents into vector embeddings.
+2. **Indexing**: Index the vectors for efficient retrieval.
+3. **Vector Database**: Store and manage the indexed vectors.
+4. **Querying**: Perform similarity searches to find relevant vectors.
+5. **Post Processing**: Refine and use the results for text generation.
+
+### Advantages
+
+- **Accuracy**: Improves the relevance and quality of retrieved information.
+- **Latency**: Reduces the time required for retrieval operations.
+- **Scalability**: Supports large-scale indexing and querying of vectors.
+
+## Keyword vs. Semantic Search
+
+### Keyword Search
+
+- **Description**: Matches query terms with exact keywords in the database.
+- **Limitations**: Limited to exact matches and does not understand context or intent.
+
+### Semantic Search
+
+- **Description**: Retrieves documents based on the meaning and context of the query.
+- **Techniques**:
+  - **Dense Retrieval**: Uses embeddings to understand and match context.
+  - **Reranking**: Assigns relevance scores to improve result accuracy.
+  - **Hybrid Search**: Combines both sparse (keyword-based) and dense (embedding-based) retrieval methods to balance accuracy and efficiency.
+
+## Conclusion
+
+Integrating RAG with Aide enhances the accuracy and relevance of generated responses by leveraging external data sources and embedding models. By following this guide, you can effectively set up and configure RAG, manage your knowledge base, and utilize vector databases to improve your Aide-powered interactions.

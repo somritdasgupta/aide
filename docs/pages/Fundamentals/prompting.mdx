@@ -1,0 +1,57 @@
+# Prompting and Prompt Engineering
+
+Effective prompting is crucial for eliciting the desired responses from Large Language Models (LLMs). This chapter delves into the techniques and strategies for crafting and refining prompts.
+
+## Prompting
+
+Prompting involves providing an LLM with input text to guide its response. The quality and specificity of the prompt can significantly impact the relevance and accuracy of the output.
+
+### Basic Prompting
+
+Basic prompting entails giving the model a straightforward question or instruction. For example:
+- **Question:** "What is the capital of Japan?"
+- **Instruction:** "Translate the following sentence into French."
+
+### Advanced Prompting Techniques
+
+- **Zero-Shot Prompting**: The model is given a task without any specific examples. It relies on its pre-existing knowledge to generate a response.
+- **Few-Shot Prompting**: The model is provided with a few examples of the task at hand. This method helps in guiding the model's output more effectively.
+
+## Prompt Engineering
+
+Prompt engineering is the process of iteratively refining prompts to achieve better results. This may involve adjusting the wording, structure, or content of the prompt.
+
+### Techniques
+
+- **Iterative Refinement**: Continuously modifying the prompt based on the model's responses to improve clarity and effectiveness.
+- **Contextualization**: Providing additional context or instructions within the prompt to guide the model's output.
+
+## In-Context Learning and Few-Shot Prompting
+
+### In-Context Learning
+
+In-context learning involves conditioning the model with examples or instructions directly within the prompt. This allows the model to understand and perform the task based on the provided context.
+
+### K-Shot Prompting
+
+K-shot prompting provides the model with _k_ examples of the task to guide its responses. This technique helps in better alignment of the model's output with the desired format.
+
+## Advanced Prompting Strategies
+
+- **Chain-of-Thought**: Encourages the model to provide intermediate reasoning steps, improving the coherence and relevance of the output.
+- **Least-to-Most**: Prompts the model to tackle easier tasks first before addressing more complex problems.
+- **Step-Back**: Involves prompting the model to identify high-level concepts and then break them down into manageable steps.
+
+## Issues with Prompting
+
+### Prompt Injection (Jailbreak)
+
+Prompt injection involves crafting prompts to bypass the model's safeguards or induce harmful behavior. This technique can exploit vulnerabilities in the model's response generation process.
+
+### Memorization
+
+Models may inadvertently memorize and repeat prompts, potentially leading to leakage of sensitive or private information. Monitoring and mitigating such issues is essential for maintaining data privacy and security.
+
+## References
+
+- [Prompt Injection Study](https://arxiv.org/abs/2306.05499)
