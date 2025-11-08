@@ -28,7 +28,7 @@
     "@tanstack/react-query": "^5.56.2",
     "@vitejs/plugin-react": "^4.3.1",
     "antd": "^5.21.1",
-    "axios": "^1.7.7",
+    "axios": "^1.13.2",
     "cheerio": "^1.0.0",
     "d3-dsv": "^2.0.0",
     "dayjs": "^1.11.13",
