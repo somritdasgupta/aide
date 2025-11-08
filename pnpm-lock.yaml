@@ -73,13 +73,13 @@ importers:
         version: 7.2.1
       langchain:
         specifier: ^0.1.37
-        version: 0.1.37(@mozilla/readability@0.5.0)(axios@1.7.7)(cheerio@1.0.0)(d3-dsv@2.0.0)(html-to-text@9.0.5)(jsdom@20.0.3(canvas@2.11.2))(mammoth@1.8.0)(openai@4.65.0(zod@3.23.8))(ws@8.18.0)
+        version: 0.1.37(@mozilla/readability@0.5.0)(axios@1.7.7)(cheerio@1.0.0)(d3-dsv@2.0.0)(html-to-text@9.0.5)(jsdom@20.0.3(canvas@2.11.2))(mammoth@1.11.0)(openai@4.65.0(zod@3.23.8))(ws@8.18.0)
       lucide-react:
         specifier: ^0.350.0
         version: 0.350.0(react@18.2.0)
       mammoth:
-        specifier: ^1.8.0
-        version: 1.8.0
+        specifier: ^1.11.0
+        version: 1.11.0
       ml-distance:
         specifier: ^4.0.1
         version: 4.0.1
@@ -1753,8 +1753,8 @@ packages:
   '@webext-core/match-patterns@1.0.3':
     resolution: {integrity: sha512-NY39ACqCxdKBmHgw361M9pfJma8e4AZo20w9AY+5ZjIj1W2dvXC8J31G5fjfOGbulW9w4WKpT8fPooi0mLkn9A==}
 
-  '@xmldom/xmldom@0.8.10':
-    resolution: {integrity: sha512-2WALfTl4xo2SkGCYRt6rDTFfk9R1czmBvUQy12gK2KuRKIpWEhcbbzy8EZXtz/jkRqHX8bFEc6FC1HjX4TUWYw==}
+  '@xmldom/xmldom@0.8.11':
+    resolution: {integrity: sha512-cQzWCtO6C8TQiYl1ruKNn2U6Ao4o4WBBcbL61yJl84x+j5sOWWFU9X7DpND8XZG3daDppSsigMdfAIl2upQBRw==}
     engines: {node: '>=10.0.0'}
 
   abab@2.0.6:
@@ -3329,9 +3329,11 @@ packages:
 
   lodash.clone@4.5.0:
     resolution: {integrity: sha512-GhrVeweiTD6uTmmn5hV/lzgCQhccwReIVRLHp7LT4SopOjqEZ5BbX8b5WWEtAKasjmy8hR7ZPwsYlxRCku5odg==}
+    deprecated: This package is deprecated. Use structuredClone instead.
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.isplainobject@4.0.6:
     resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
@@ -3391,8 +3393,8 @@ packages:
   make-error@1.3.6:
     resolution: {integrity: sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==}
 
-  mammoth@1.8.0:
-    resolution: {integrity: sha512-pJNfxSk9IEGVpau+tsZFz22ofjUsl2mnA5eT8PjPs2n0BP+rhVte4Nez6FdgEuxv3IGI3afiV46ImKqTGDVlbA==}
+  mammoth@1.11.0:
+    resolution: {integrity: sha512-BcEqqY/BOwIcI1iR5tqyVlqc3KIaMRa4egSoK83YAVrBf6+yqdAAbtUcFDCWX8Zef8/fgNZ6rl4VUv+vVX8ddQ==}
     engines: {node: '>=12.0.0'}
     hasBin: true
 
@@ -3404,6 +3406,7 @@ packages:
 
   mathjax-full@3.2.2:
     resolution: {integrity: sha512-+LfG9Fik+OuI8SLwsiR02IVdjcnRCy5MufYLi0C3TdMT56L/pjB0alMVGgoWJF8pN9Rc7FESycZB9BMNWIid5w==}
+    deprecated: Version 4 replaces this package with the scoped package @mathjax/src
 
   md5@2.3.0:
     resolution: {integrity: sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==}
@@ -3690,6 +3693,7 @@ packages:
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
+    deprecated: Use your platform's native DOMException instead
 
   node-fetch-native@1.6.4:
     resolution: {integrity: sha512-IhOigYzAKHd244OC0JIMIUrjzctirCmPkaIfhDeGcEETWof5zKYUW7e7MYvChGWh/4CJeXEgsRyGzuF334rOOQ==}
@@ -4760,6 +4764,9 @@ packages:
 
   tslib@2.7.0:
     resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
+
+  tslib@2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
   turndown@7.2.0:
     resolution: {integrity: sha512-eCZGBN4nNNqM9Owkv9HAtWRYfLA4h909E/WGAWWBpmB275ehNhZyk87/Tpvjbp0jjNl9XwCsbe6bm6CqFsgD+A==}
@@ -6001,7 +6008,7 @@ snapshots:
 
   '@swc/helpers@0.5.2':
     dependencies:
-      tslib: 2.7.0
+      tslib: 2.8.1
     optional: true
 
   '@swc/types@0.1.12':
@@ -6181,7 +6188,7 @@ snapshots:
 
   '@webext-core/match-patterns@1.0.3': {}
 
-  '@xmldom/xmldom@0.8.10': {}
+  '@xmldom/xmldom@0.8.11': {}
 
   abab@2.0.6: {}
 
@@ -7638,7 +7645,7 @@ snapshots:
 
   klona@2.0.6: {}
 
-  langchain@0.1.37(@mozilla/readability@0.5.0)(axios@1.7.7)(cheerio@1.0.0)(d3-dsv@2.0.0)(html-to-text@9.0.5)(jsdom@20.0.3(canvas@2.11.2))(mammoth@1.8.0)(openai@4.65.0(zod@3.23.8))(ws@8.18.0):
+  langchain@0.1.37(@mozilla/readability@0.5.0)(axios@1.7.7)(cheerio@1.0.0)(d3-dsv@2.0.0)(html-to-text@9.0.5)(jsdom@20.0.3(canvas@2.11.2))(mammoth@1.11.0)(openai@4.65.0(zod@3.23.8))(ws@8.18.0):
     dependencies:
       '@anthropic-ai/sdk': 0.9.1
       '@langchain/community': 0.0.57(@mozilla/readability@0.5.0)(html-to-text@9.0.5)(jsdom@20.0.3(canvas@2.11.2))(openai@4.65.0(zod@3.23.8))(ws@8.18.0)
@@ -7664,7 +7671,7 @@ snapshots:
       d3-dsv: 2.0.0
       html-to-text: 9.0.5
       jsdom: 20.0.3(canvas@2.11.2)
-      mammoth: 1.8.0
+      mammoth: 1.11.0
       ws: 8.18.0
     transitivePeerDependencies:
       - '@aws-crypto/sha256-js'
@@ -7867,9 +7874,9 @@ snapshots:
 
   make-error@1.3.6: {}
 
-  mammoth@1.8.0:
+  mammoth@1.11.0:
     dependencies:
-      '@xmldom/xmldom': 0.8.10
+      '@xmldom/xmldom': 0.8.11
       argparse: 1.0.10
       base64-js: 1.5.1
       bluebird: 3.4.7
@@ -9607,6 +9614,9 @@ snapshots:
   ts-interface-checker@0.1.13: {}
 
   tslib@2.7.0: {}
+
+  tslib@2.8.1:
+    optional: true
 
   turndown@7.2.0:
     dependencies:
